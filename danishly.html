@@ -714,13 +714,11 @@ function switchTab(tabName) {
     
     // Update nav
     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    document.querySelectorAll('[data-tab]').forEach(link => {
+        if (link.getAttribute('data-tab') === tabName) link.classList.add('active');
+    });
     
     // Update content
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    document.querySelector(`[data-tab="${tabName}"]`).parentElement.nextElementSibling.querySelector(`[data-tab="${tabName}"]`)?.classList.add('active');
-    
-    // Use a simpler approach
     document.querySelectorAll('.tab-content').forEach(content => {
         if (content.getAttribute('data-tab') === tabName) {
             content.classList.add('active');
